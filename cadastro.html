@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casas | Hogwarts</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <header class="cabecalho">
+            <div>
+                <h1>Bem-vindo a Hogwarts 🏰</h1>
+                <p class="subtitulo">Escolha sua casa de Hogwarts</p>
+            </div>
+            <button class="botao-sair"
+                onclick="window.location.href='login.html'">Sair</button>
+        </header>
+
+        <form id="formProduto">
+            <div class="campo">
+                <label for="nome">Nome do Bruxo:</label>
+                <input type="text" id="nome"
+                    placeholder="Digite seu nome" required>
+            </div>
+
+            <fieldset>
+                <legend>Escolha sua Casa</legend>
+
+                <div class="opcoes-unidade">
+                    <label class="opcao">
+                        <input type="radio" name="casa" value="Sonserina" required>
+                        🐍 Sonserina
+                    </label>
+
+                    <label class="opcao">
+                        <input type="radio" name="casa" value="Grifinória">
+                        🦁 Grifinória
+                    </label>
+
+                    <label class="opcao">
+                        <input type="radio" name="casa" value="Corvinal">
+                        🦅 Corvinal
+                    </label>
+
+                    <label class="opcao">
+                        <input type="radio" name="casa" value="Lufa-Lufa">
+                        🦡 Lufa-Lufa
+                    </label>
+                </div>
+            </fieldset>
+
+            <div class="botoes">
+                <button type="submit" class="botao-principal">
+                    Confirmar Casa
+                </button>
+
+                <button type="reset" class="botao-secundario">
+                    Limpar
+                </button>
+            </div>
+
+            <p id="mensagemProduto"></p>
+        </form>
+
+        <p class="rodape">Hogwarts | Escola de Magia e Bruxaria</p>
+    </main>
+
+    <script>
+        const formProduto = document.getElementById("formProduto");
+        const mensagemProduto = document.getElementById("mensagemProduto");
+
+        formProduto.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const nome = document.getElementById("nome").value.trim();
+        const casa = document.querySelector('input[name="casa"]:checked');
+
+    if(!nome || !casa) {
+        mensagemProduto.textContent = "Preencha seu nome e escolha uma casa.";
+        return;
+    }
+
+    localStorage.setItem("nomeBruxo", nome);
+    localStorage.setItem("casaHogwarts", casa.value);
+
+    mensagemProduto.style.color = "#174d38";
+    mensagemProduto.textContent =
+        "Bem-vindo(a), " + nome + "! Sua casa é " + casa.value + "!";
+});
+
+    formProduto.addEventListener("reset", function() {
+    mensagemProduto.textContent = "";
+});
+
+    </script>
+</body>
+</html>
